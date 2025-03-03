@@ -1,5 +1,0 @@
----
-"beautimap": patch
----
-
-initialization
