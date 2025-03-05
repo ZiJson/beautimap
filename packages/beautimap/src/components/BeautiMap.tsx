@@ -1,14 +1,5 @@
-import { useMemo, useRef } from "react";
-import {
-  Circle,
-  GoogleMap,
-  GoogleMapProps,
-  Marker,
-  MarkerClusterer,
-  MarkerF,
-  OverlayView,
-  StandaloneSearchBox,
-} from "@react-google-maps/api";
+import { useMemo } from "react";
+import { GoogleMap, GoogleMapProps } from "@react-google-maps/api";
 
 import { cn } from "../lib/utils";
 import { Fuse, WY } from "../themes";
@@ -29,11 +20,10 @@ export const BeautiMap = ({
   children,
   ...props
 }: BeautiMapProps) => {
-  const ref = useRef<google.maps.places.SearchBox | null>(null);
   const mapOptions = useMemo(
     () => ({
       styles: theme === "dark" ? Fuse : WY,
-      // disableDefaultUI: true,
+      disableDefaultUI: true,
       ...options,
     }),
     [theme, options]
@@ -52,30 +42,6 @@ export const BeautiMap = ({
       {...props}
     >
       {children}
-      <StandaloneSearchBox
-        onLoad={(reff) => (ref.current = reff)}
-        onPlacesChanged={() => console.log(ref.current?.getPlaces())}
-      >
-        <input
-          type="text"
-          placeholder="Customized your placeholder"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: "absolute",
-            left: "50%",
-            marginLeft: "-120px",
-          }}
-        />
-      </StandaloneSearchBox>
     </GoogleMap>
   );
 };

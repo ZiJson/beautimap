@@ -1,10 +1,11 @@
 import React, { Children, isValidElement } from "react";
 import {
   MarkerClusterer as MapMarkerClusterer,
-  Marker,
   MarkerProps,
   type MarkerClustererProps as MapMarkerClustererProps,
 } from "@react-google-maps/api";
+
+import { Marker } from "./Marker";
 
 export interface MarkerClustererProps
   extends Omit<MapMarkerClustererProps, "children"> {
@@ -22,7 +23,10 @@ export const MarkerClusterer = ({
         <>
           {Children.map(children, (child) => {
             console.log(child);
-            if (isValidElement(child) && child.type === Marker) {
+            if (
+              isValidElement(child) &&
+              (child.type === Marker || child.type === typeof Marker)
+            ) {
               const markProps = child.props as MarkerProps;
               return (
                 <Marker

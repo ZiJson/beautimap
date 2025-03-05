@@ -8,9 +8,5 @@ interface ProviderProps {
 }
 
 export const BeautiMapProvider = ({ apiKey, children }: ProviderProps) => {
-  return (
-    <LoadScript googleMapsApiKey={apiKey} libraries={["places"]}>
-      {children}
-    </LoadScript>
-  );
+  return <LoadScript googleMapsApiKey={apiKey}>{children}</LoadScript>;
 };
